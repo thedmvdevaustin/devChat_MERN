@@ -17,7 +17,6 @@ const postMessage = async (req, res) => {
         //access senderId and receiverId in the conversations db participants
         //array, and add this message to the messages array
         let conversation = await Conversations.findOne({ participants: { $all: [senderId, receiverId]}})
-        console.log(conversation)
         if (!conversation){
             conversation = await Conversations.create({
                 messages: [newMessage._id],

@@ -14,7 +14,6 @@ const getConversation = async(req, res) => {
             const convo = await Promise.all(conversation.messages.map(async x => {
                 return await Messages.findOne(x)
             }))
-            console.log(convo)
             res.status(200).json(convo)
         }
     } catch(err){
@@ -37,7 +36,8 @@ const getAllConversations = async(req, res) => {
             const senderConversations = await Promise.all(conversations.map(async x => {
                 return await User.find(x.participants[1]).select("-password")
             }))
-            res.status(200).json(senderConversations)
+            console.log()
+            res.status(200).json(senderConversations.flat())
         }
     } catch(err){
         console.log(`error, conversationsController getAllConversations - ${err.message}`)
