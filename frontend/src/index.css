@@ -206,21 +206,27 @@ h1 {
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.searchForm-container {
+.dashboard-left {
   width: 40%;
-  border-bottom: 1px solid rgb(99,105,108);
+  padding: .5rem;
+  border-right: 1px solid rgba(99,105,108, 0.5)
+}
+
+.searchForm-container {
+  border-bottom: 1px solid rgba(99,105,108, 0.2);
+  padding: .5rem;
 }
 
 .searchForm {
+  margin-bottom: .7rem;
   display: flex;
-  padding: .5rem;
   align-items: center;
   gap: 5%;
 }
 .searchForm > input {
   width: 80%;
   padding: .5rem;
-  background-color: rgb(27,35,41);
+  background-color: rgb(27,35,41); /* change color */
   color: white;
   border: none;
   border-radius: 2rem;
@@ -238,3 +244,69 @@ h1 {
   padding: .5rem;
   background-color: rgb(16,164,231);
 }
+
+.contacts-container {
+  margin: 1.3rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.contact {
+  display: flex;
+  gap: 5%;
+  border-bottom: 1px solid rgb(99,105,108, 0.2);
+  padding: .5rem;
+}
+
+.contact:hover {
+  opacity: .7
+}
+
+.contact > span {
+  color: white;
+  margin-top: .3rem;
+}
+
+.user {
+  text-decoration: none;
+}
+
+.contact > img {
+  width: 30px;
+}
+
+
+
+.logout > form > button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+button[data-tool-tip]{
+  position: relative;
+}
+
+button[data-tool-tip]::after {
+  content: attr(data-tool-tip);
+  background: rgb(27,35,41);
+  color: white;
+  padding: .3rem;
+  font-size: 1rem;
+  border-radius: .2rem;
+  font-weight: bold;
+  position: absolute;
+  display: block;
+  left: 0;
+  bottom: 0;
+  transform: scale(0);
+  transition: transform ease-out 150ms;
+}
+
+button[data-tool-tip]:hover::after{
+  transform: scale(1);
+  bottom: -100%;
+} 

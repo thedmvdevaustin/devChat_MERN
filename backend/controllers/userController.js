@@ -2,15 +2,18 @@ import User from '../models/UserModel.js'
 import generateToken from '../utils/generateToken.js'
 
 const register = async (req, res) => {
-    const { fullName, email, password } = req.body
+    const { firstName, lastName, email, password } = req.body
     try {
         let user = await User.findOne({email: email})
         if (user) {
             return res.status(400).json({error: "User already exists"})
         }
+
         const newUser = await User.create({
-            fullName,
+            firstName,
+            lastName,
             email,
+            profilePic: `https://avatar.iran.liara.run/username?username=${firstName}+${lastName}`,
             password
         })
         if (newUser){
@@ -18,7 +21,8 @@ const register = async (req, res) => {
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
-                email: newUser.email
+                email: newUser.email,
+                profilePic: newUser.profilePic
             })
         } else {
             return res.status(400).json({error: "Failed to create User"})

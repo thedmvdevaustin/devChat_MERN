@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRegisterMutation } from '../slices/usersApiSlice'
 import { setCredentials } from '../slices/authSlice'
+import { toast } from 'react-toastify'
 
 const RegisterScreen = () => {
     const navigate = useNavigate()
@@ -42,7 +43,7 @@ const RegisterScreen = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         if (password!==password2){
-            // toast.error("Passwords don't match")
+            toast.error("Passwords don't match")
             setPassword("")
             setPassword2("")
             return
@@ -51,10 +52,10 @@ const RegisterScreen = () => {
             const user = await register({fullName, email, password})
             console.log(user)
             dispatch(setCredentials(user))
-            // toast.success("Registered, Welcome to devChat!")
+            toast.success("Registered, Welcome to devChat!")
             navigate("/dashboard")
         } catch(err){
-            // toast.error(err?.data?.message || err.error)
+            toast.error(err?.data?.message || err.error)
         }
     }
     return (

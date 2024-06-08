@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useLoginMutation } from '../slices/usersApiSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCredentials } from '../slices/authSlice'
-
+import { toast } from 'react-toastify'
 const LoginScreen = () => {
     const dispatch = useDispatch()
     const [login, { isLoading }] = useLoginMutation()
@@ -37,9 +37,9 @@ const LoginScreen = () => {
             setEmail("")
             setPassword("")
             navigate('/dashboard')
-            // toast.success("Login successful!")
+            toast.success("Login successful!")
         } catch(err){
-            // toast.error(err?.data?.message || err.error)
+            toast.error(err?.data?.message || err.error)
         }
     }
 
