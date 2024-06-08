@@ -7,13 +7,14 @@ import { Provider } from 'react-redux'
 import store from './store.jsx'
 import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
+import DashboardScreen from './screens/DashboardScreen.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
-      <Route path="/dashboard" element={<h1>It Works!</h1>} />
+      <Route path="/dashboard" element={<DashboardScreen />} />
     </Route>
   )
 )
