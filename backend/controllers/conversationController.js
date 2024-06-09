@@ -34,9 +34,13 @@ const getAllConversations = async(req, res) => {
         } else {
             //creates an array of an array of users, these users are the receivers without the password
             const senderConversations = await Promise.all(conversations.map(async x => {
-                return await User.find(x.participants[1]).select("-password")
+                if (x.participants[1].equals(req.user._id)) {
+                    return await User.find(x.participants[0]).select("-password")
+                } else {
+                    return await User.find(x.participants[1]).select("-password")
+                }
             }))
-            console.log()
+
             res.status(200).json(senderConversations.flat())
         }
     } catch(err){
@@ -56,4 +60,18 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-export { getConversation, getAllConversations, getAllUsers}
+const getUserById = async (req, res) => {
+    
+    try{
+        const user = await User.findById(req.params.id)
+        if (!user){
+            return res.status(400).json({error: "User does not exist"})
+        }
+        res.status(200).json(user)
+    } catch(err){
+        console.log(`error, conversationController, getUserById - ${err.message}`)
+        res.status(400).json({error: "couldn't get user from db"})
+    }
+}
+
+export { getConversation, getUserById, getAllConversations, getAllUsers}

@@ -204,12 +204,16 @@ h1 {
   border: 2px solid rgba(255, 255, 255, .1);
   backdrop-filter: blur(30px);
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  display: flex;
 }
 
 .dashboard-left {
   width: 40%;
   padding: .5rem;
   border-right: 1px solid rgba(99,105,108, 0.5)
+}
+.dashboard-right {
+  width: 100%;
 }
 
 .searchForm-container {
@@ -226,7 +230,7 @@ h1 {
 .searchForm > input {
   width: 80%;
   padding: .5rem;
-  background-color: rgb(27,35,41); /* change color */
+    background-color: rgb(40,51,63);
   color: white;
   border: none;
   border-radius: 2rem;
@@ -301,12 +305,79 @@ button[data-tool-tip]::after {
   position: absolute;
   display: block;
   left: 0;
-  bottom: 0;
+  bottom: -100%;
   transform: scale(0);
   transition: transform ease-out 150ms;
 }
 
 button[data-tool-tip]:hover::after{
   transform: scale(1);
-  bottom: -100%;
 } 
+
+.receiver {
+  background-color: rgb(100,116,139, 0.4);
+  width: 100%;
+  border-radius: .2rem;
+}
+
+.receiver > p {
+  padding: .5rem;
+  padding-left: .8rem;
+  color: rgb(50, 53, 57);
+  font-weight: bold;
+}
+
+.senderMessage, .receiverMessage {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 5% 2%;
+  gap: 2%;
+  position: relative;
+}
+
+.receiverMessage {
+  flex-direction: row;
+}
+
+.senderMessage > p, .receiverMessage > p {
+  background-color: rgb(62,130,243);
+  padding: .5rem;
+  color: white;
+  border-radius: .5rem;
+  position: relative;
+}
+
+.senderMessage > p::before, .receiverMessage > p::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-left: 15px solid rgb(62,130,243);
+  position: absolute;
+  right: -13px;
+  bottom: -5px;
+  transform: rotate(30deg);
+}
+
+.receiverMessage > p {
+  background-color: rgb(40,51,63);
+}
+.receiverMessage > p::before {
+  border: 5px solid transparent;
+  border-right: 15px solid rgb(40,51,63);
+  right: 0;
+  left: -13px;
+  transform: rotate(-30deg)
+}
+
+.senderMessage > img, .receiverMessage > img {
+  width: 30px;
+}
+
+.senderMessage > span, .receiverMessage > span {
+  position: absolute;
+  color: rgba(99,105,108, 0.8);
+  bottom: -13px;
+  right: 37px;
+  font-size: .6rem;
+}

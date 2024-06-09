@@ -1,11 +1,10 @@
 import SearchForm from '../components/SearchForm'
 import Contacts from '../components/Contacts'
-import Conversation from '../components/Conversation'
 import { CiLogout } from "react-icons/ci"
 import { useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const DashboardScreen = () => {
@@ -38,8 +37,8 @@ const DashboardScreen = () => {
                     </form>
                 </div>
             </div>
-            <div className="dashbaord-right">
-                <Conversation />
+            <div className="dashboard-right">
+                <Outlet />
             </div>
         </section>
     )

@@ -1,8 +1,12 @@
 import { IoMdSearch } from 'react-icons/io'
-import { useState } from 'react'
- 
+import { useState, useEffect } from 'react'
+import { useGetAllUserQuery } from '../slices/conversationsApiSlice'
+import { useSelector } from 'react-redux'
 const SearchForm = () => {
     const [search, setSearch] = useState("")
+
+    const { data: usersData } = useGetAllUserQuery()
+
 
     const changeSearch = e => {
         setSearch(e.target.value)

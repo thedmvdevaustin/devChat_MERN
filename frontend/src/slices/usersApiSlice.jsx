@@ -9,13 +9,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: user
             }),
+            invalidatesTags: ['Conversations', 'Messages', 'Users']
         }),
         login: builder.mutation({
             query: (user) => ({
                 url: `${USERS_URL}/`,
                 method: 'POST',
                 body: user
-            })
+            }),
+            invalidatesTags: ['Conversations', 'Messages']
         }),
         logout: builder.mutation({
             query: () => ({
