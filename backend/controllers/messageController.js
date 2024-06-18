@@ -1,6 +1,6 @@
 import Messages from '../models/MessagesModel.js'
 import Conversations from '../models/ConversationsModel.js'
-
+import { io, getReceiverSocketId } from '../socket/socket.js'
 const postMessage = async (req, res) => {
     const { message } = req.body
     const senderId = req.user._id
@@ -27,11 +27,16 @@ const postMessage = async (req, res) => {
             await conversation.save()
         }
         //use socket.io to actually send the message to the receiverId
+        const receiverSocketId = getReceiverSocketId(receiverId)
+        if (receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage)
+        }
+        res.status(200).json({message: "message posted"})
         }catch(err){
         console.log(`error in messageController, postMessage - ${err.message}`)
         res.status(400).json({error: "message failed to send"})
     }
-    res.status(200).json({message: "message posted"})
+    
 }
 
 export { postMessage }

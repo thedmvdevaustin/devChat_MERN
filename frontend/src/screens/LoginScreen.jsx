@@ -59,7 +59,7 @@ const LoginScreen = () => {
                     <button type="submit">Login</button>
                 </div>
                 <div className="toRegister">
-                    <p>Need to register? <Link to="/register">Register</Link></p>
+                    <p>Need to register? <Link to="/register" data-tool-tip="Go to Register">Register</Link></p>
                 </div>
             </form>
         </section>

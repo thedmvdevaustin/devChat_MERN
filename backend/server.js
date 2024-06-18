@@ -6,10 +6,9 @@ import { notFound, errorHandler } from './middleware/errorHandler.js'
 import userRoutes from './routes/userRoutes.js'
 import messageRoutes from './routes/messageRoutes.js'
 import conversationRoutes from './routes/conversationRoute.js'
-
+import { app, server } from './socket/socket.js' 
 dotenv.config()
 
-const app = express()
 
 connectDB()
 
@@ -24,4 +23,4 @@ app.use('/api/conversations', conversationRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-app.listen(process.env.PORT || 5000, () => console.log(`Port running on ${process.env.PORT || 3000}...`))
+server.listen(process.env.PORT || 5000, () => console.log(`Port running on ${process.env.PORT || 3000}...`))

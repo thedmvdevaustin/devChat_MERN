@@ -7,15 +7,16 @@ const getConversation = async(req, res) => {
     try {
         const conversation = await Conversations.findOne({
             participants: { $all: [req.user._id, receiverId]}
-        }).select("messages")
-        if (!conversation){
-            return res.status(400).json({error: "no conversation found"})
-        } else {
-            const convo = await Promise.all(conversation.messages.map(async x => {
-                return await Messages.findOne(x)
-            }))
-            res.status(200).json(convo)
-        }
+        }).populate("messages")
+        // if (!conversation){
+        //     return res.status(400).json({error: "no conversation found"})
+        // } else {
+        //     const convo = await Promise.all(conversation.messages.map(async x => {
+        //         return await Messages.findOne(x)
+        //     }))
+        // this was the logic i used before i learned about populate
+        // returns everything that is inside of the messages array alone
+        res.status(200).json(conversation)
     } catch(err){
         console.log(`error, conversationController, getConversation - ${err.message}`)
     }
@@ -33,15 +34,15 @@ const getAllConversations = async(req, res) => {
             return res.status(400).json({error: "no conversations found"})
         } else {
             //creates an array of an array of users, these users are the receivers without the password
-            const senderConversations = await Promise.all(conversations.map(async x => {
-                if (x.participants[1].equals(req.user._id)) {
-                    return await User.find(x.participants[0]).select("-password")
-                } else {
-                    return await User.find(x.participants[1]).select("-password")
-                }
-            }))
+            // const senderConversations = await Promise.all(conversations.map(async x => {
+            //     if (x.participants[1].equals(req.user._id)) {
+            //         return await User.find(x.participants[0]).select("-password")
+            //     } else {
+            //         return await User.find(x.participants[1]).select("-password")
+            //     }
+            // }))
 
-            res.status(200).json(senderConversations.flat())
+            res.status(200).json(conversations)
         }
     } catch(err){
         console.log(`error, conversationsController getAllConversations - ${err.message}`)

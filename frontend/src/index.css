@@ -198,6 +198,31 @@ h1 {
   font-weight: bold;
 }
 
+.toRegister > p > a[data-tool-tip] {
+  position: relative;
+}
+
+.toRegister > p > a[data-tool-tip]::after {
+  content: attr(data-tool-tip);
+  background: rgb(27,35,41);
+  color: white;
+  padding: .3rem;
+  font-size: .7rem;
+  border-radius: .2rem;
+  font-weight: bold;
+  position: absolute;
+  display: block;
+  left: 0;
+  white-space: nowrap;
+  bottom: -150%;
+  transform: scale(0);
+  transition: transform ease-out 150ms;
+}
+
+.toRegister > p > a[data-tool-tip]:hover::after {
+  transform: scale(1)
+}
+
 .dashboard-container {
   width: 70%;
   background: transparent;
@@ -210,9 +235,14 @@ h1 {
 .dashboard-left {
   width: 40%;
   padding: .5rem;
-  border-right: 1px solid rgba(99,105,108, 0.5)
+  border-right: 1px solid rgba(99,105,108, 0.5);
+  /* overflow: scroll; */
 }
+
 .dashboard-right {
+  /* overflow: scroll; */
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -257,15 +287,26 @@ h1 {
   cursor: pointer;
 }
 
+
+
 .contact {
   display: flex;
   gap: 5%;
   border-bottom: 1px solid rgb(99,105,108, 0.2);
   padding: .5rem;
+  align-items: center;
 }
 
 .contact:hover {
   opacity: .7
+}
+
+.active {
+  background-color: rgba(62,130,243, .5);
+  text-decoration: none;
+}
+.inActive {
+  text-decoration: none;
 }
 
 .contact > span {
@@ -273,12 +314,9 @@ h1 {
   margin-top: .3rem;
 }
 
-.user {
-  text-decoration: none;
-}
-
 .contact > img {
   width: 30px;
+  height: 30px;
 }
 
 
@@ -312,7 +350,7 @@ button[data-tool-tip]::after {
 
 button[data-tool-tip]:hover::after{
   transform: scale(1);
-} 
+}
 
 .receiver {
   background-color: rgb(100,116,139, 0.4);
@@ -325,14 +363,16 @@ button[data-tool-tip]:hover::after{
   padding-left: .8rem;
   color: rgb(50, 53, 57);
   font-weight: bold;
+  height: 10%;
 }
 
 .senderMessage, .receiverMessage {
   display: flex;
   flex-direction: row-reverse;
-  margin: 5% 2%;
+  margin: 10% 2%;
   gap: 2%;
   position: relative;
+  align-items: flex-end;
 }
 
 .receiverMessage {
@@ -372,12 +412,74 @@ button[data-tool-tip]:hover::after{
 
 .senderMessage > img, .receiverMessage > img {
   width: 30px;
+  height: 30px;
 }
 
-.senderMessage > span, .receiverMessage > span {
+.senderMessage > span {
   position: absolute;
   color: rgba(99,105,108, 0.8);
   bottom: -13px;
   right: 37px;
   font-size: .6rem;
+}
+
+.receiverMessage > span {
+  position: absolute;
+  color: rgba(99,105,108, 0.8);
+  bottom: -13px;
+  left: 37px;
+  font-size: .6rem;
+}
+
+.noConvo-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  height: 100%;
+}
+
+.noConvo-display > svg {
+  font-size: 2rem;
+  color: white;
+}
+
+.noConvo-display > p > svg {
+  color: yellow;
+}
+
+.sendMessage-form {
+  width: 100%;
+  position: relative;
+}
+.sendMessage-form > input {
+  width: 100%;
+  padding: .4rem .1rem;
+  color: white;
+  background-color: rgba(99,105,108, 0.2);
+  border: none;
+  height: 10%
+}
+.sendMessage-form > input::placeholder {
+  color: white;
+  padding: 0 .4rem;
+}
+.sendMessage-form > input:active {
+  outline: none;
+  border: none;
+}
+
+.sendMessage-form > button {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  background: none;
+  border: none;
+  color: rgb(62,130,243);
+  font-size: 1.3rem;
+}
+
+.conversation{
+  height: 85%
 }

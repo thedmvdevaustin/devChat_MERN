@@ -11,7 +11,8 @@ import { toast } from 'react-toastify'
 const RegisterScreen = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [fullName, setFullName] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
@@ -24,8 +25,11 @@ const RegisterScreen = () => {
         }
     }, [navigate, userInfo])
 
-    const handleFullName = e => {
-        setFullName(e.target.value)
+    const handleFirstName = e => {
+        setFirstName(e.target.value)
+    }
+    const handleLastName = e => {
+        setLastName(e.target.value)
     }
 
     const handleEmail = e => {
@@ -43,13 +47,13 @@ const RegisterScreen = () => {
     const handleSubmit = async e => {
         e.preventDefault()
         if (password!==password2){
-            toast.error("Passwords don't match")
+            toast.error("Passwords don't match, Please try again!")
             setPassword("")
             setPassword2("")
             return
         }
         try {
-            const user = await register({fullName, email, password})
+            const user = await register({firstName, lastName, email, password})
             console.log(user)
             dispatch(setCredentials(user))
             toast.success("Registered, Welcome to devChat!")
@@ -63,7 +67,11 @@ const RegisterScreen = () => {
             <form onSubmit={handleSubmit} className="login-form">
                 <h1>Register</h1>
                 <div className="input-container">
-                    <input required value={fullName} onChange={handleFullName} placeholder="Full Name" type="text" name="fullName" className="email" />
+                    <input required value={firstName} onChange={handleFirstName} placeholder="First Name" type="text" name="fullName" className="email" />
+                    <IoPersonSharp className="shape" />
+                </div>
+                <div className="input-container">
+                    <input required value={lastName} onChange={handleLastName} placeholder="Last Name" type="text" name="fullName" className="email" />
                     <IoPersonSharp className="shape" />
                 </div>
                 <div className="input-container">
@@ -82,7 +90,7 @@ const RegisterScreen = () => {
                     <button type="submit">Register</button>
                 </div>
                 <div className="toRegister">
-                    <p>Already Registered? <Link to="/">Login</Link></p>
+                    <p>Already Registered? <Link to="/" data-tool-tip="Go to Login Screen">Login</Link></p>
                 </div>
             </form>
         </section>

@@ -20,7 +20,8 @@ const register = async (req, res) => {
             generateToken(newUser, res)
             res.status(201).json({
                 _id: newUser._id,
-                fullName: newUser.fullName,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
                 email: newUser.email,
                 profilePic: newUser.profilePic
             })
@@ -45,7 +46,8 @@ const login = async (req, res) => {
             generateToken(user, res)
             res.status(200).json({
                 _id: user._id,
-                fullName: user.fullName,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email
             })
         }
